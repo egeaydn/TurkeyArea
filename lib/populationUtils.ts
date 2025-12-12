@@ -1,7 +1,5 @@
 // Nüfus yoğunluğu hesaplama ve heat map renklendirme utilities
 
-import { TURKISH_CITIES } from './cities';
-
 // Her ilin nüfus verisi (2024 tahmini - TürkiyeAPI'den gelecek)
 // Kırmızı tonları: açık pembe/krem'den koyu kırmızıya
 export const POPULATION_RANGES = [
@@ -44,7 +42,7 @@ export const REGION_STATISTICS = {
 };
 
 // İl nüfus sıralama
-export function getTopCitiesByPopulation(cities: any[], limit: number = 10) {
+export function getTopCitiesByPopulation(cities: Array<{ population: number }>, limit: number = 10) {
   return cities
     .sort((a, b) => b.population - a.population)
     .slice(0, limit);

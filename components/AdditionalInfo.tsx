@@ -3,6 +3,7 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import Image from 'next/image';
 import { useWikipediaInfo } from '@/hooks/useWikipediaInfo';
 import LoadingSpinner from './LoadingSpinner';
 
@@ -72,10 +73,13 @@ export default function AdditionalInfo({ cityName }: AdditionalInfoProps) {
                 <div className="space-y-4">
                   <div className="flex gap-4">
                     {data.thumbnail && (
-                      <img
+                      <Image
                         src={data.thumbnail.source}
                         alt={data.title}
+                        width={128}
+                        height={128}
                         className="w-32 h-32 object-cover rounded-lg border-2 border-[#DCDCDC] flex-shrink-0"
+                        unoptimized
                       />
                     )}
                     

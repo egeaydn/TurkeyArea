@@ -11,7 +11,7 @@ export default function Home() {
   const [hoveredProvince, setHoveredProvince] = useState<string | null>(null);
   const [selectedProvince, setSelectedProvince] = useState<string | null>(null);
   const [showStatistics, setShowStatistics] = useState(false);
-  const [citiesData, setCitiesData] = useState<any[]>([]);
+  const [citiesData, setCitiesData] = useState<Array<{ name: string; population: number; districts: number }>>([]);
 
   const handleHover = (province: Province | null) => {
     if (!selectedProvince) {
@@ -101,7 +101,7 @@ export default function Home() {
                   <h3 className="text-2xl font-bold bg-gradient-to-r from-[#E62727] to-[#1E93AB] bg-clip-text text-transparent mb-2">
                     Hoş Geldiniz!
                   </h3>
-                  <p className="text-sm text-gray-600">Türkiye'nin her yerini keşfedin</p>
+                  <p className="text-sm text-gray-600">Türkiye&apos;nin her yerini keşfedin</p>
                 </div>
                 
                 <div className="space-y-4">
