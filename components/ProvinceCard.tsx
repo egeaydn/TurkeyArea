@@ -12,18 +12,23 @@ export default function ProvinceCard({ provinceName, onClose }: ProvinceCardProp
 
   return (
     <motion.div
-      initial={{ x: 300, opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      exit={{ x: 300, opacity: 0 }}
+      initial={{ x: 300, opacity: 0, scale: 0.9 }}
+      animate={{ x: 0, opacity: 1, scale: 1 }}
+      exit={{ x: 300, opacity: 0, scale: 0.9 }}
       transition={{ type: 'spring', damping: 20, stiffness: 300 }}
-      className="bg-white rounded-lg shadow-xl p-6 w-full h-fit"
+      className="bg-gradient-to-br from-white via-white to-blue-50 rounded-2xl shadow-2xl border border-blue-100 p-7 w-full h-fit backdrop-blur-sm"
     >
-      <div className="flex justify-between items-start mb-4">
-        <h2 className="text-2xl font-bold text-gray-800">{provinceName}</h2>
+      <div className="flex justify-between items-start mb-6">
+        <div>
+          <h2 className="text-3xl font-extrabold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            {provinceName}
+          </h2>
+          <p className="text-xs text-gray-500 mt-1">İl Bilgileri</p>
+        </div>
         {onClose && (
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 transition-colors text-2xl leading-none"
+            className="text-gray-400 hover:text-red-500 hover:bg-red-50 transition-all text-xl leading-none rounded-full w-8 h-8 flex items-center justify-center hover:rotate-90 duration-300"
             aria-label="Kapat"
           >
             ✕
@@ -59,9 +64,12 @@ export default function ProvinceCard({ provinceName, onClose }: ProvinceCardProp
 
 function InfoItem({ label, value }: { label: string; value: string }) {
   return (
-    <div className="bg-slate-50 p-3 rounded-lg">
-      <p className="text-xs text-gray-500 mb-1">{label}</p>
-      <p className="text-lg font-semibold text-gray-800">{value}</p>
-    </div>
+    <motion.div
+      whileHover={{ scale: 1.05, y: -2 }}
+      className="bg-gradient-to-br from-slate-50 to-blue-50 p-4 rounded-xl border border-slate-200 hover:border-blue-300 transition-all cursor-default shadow-sm hover:shadow-md"
+    >
+      <p className="text-xs font-medium text-blue-600 mb-1.5">{label}</p>
+      <p className="text-xl font-bold text-gray-800">{value}</p>
+    </motion.div>
   );
 }

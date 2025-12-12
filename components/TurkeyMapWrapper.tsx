@@ -19,8 +19,8 @@ export default function TurkeyMapWrapper({
           onHover={({ plateNumber, name }) => onHover({ name, plateNumber })}
           onClick={({ plateNumber, name }) => onClick({ name, plateNumber })}
           customStyle={{
-            idleColor: '#E2E8F0',
-            hoverColor: '#60A5FA'
+            idleColor: '#F1F5F9',
+            hoverColor: '#3B82F6'
           }}
         />
       </div>
