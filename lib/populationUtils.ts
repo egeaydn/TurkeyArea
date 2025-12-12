@@ -3,14 +3,15 @@
 import { TURKISH_CITIES } from './cities';
 
 // Her ilin nüfus verisi (2024 tahmini - TürkiyeAPI'den gelecek)
+// Kırmızı tonları: açık pembe/krem'den koyu kırmızıya
 export const POPULATION_RANGES = [
-  { min: 0, max: 200000, color: '#E0F2FE', label: '0-200K' },
-  { min: 200000, max: 500000, color: '#BAE6FD', label: '200K-500K' },
-  { min: 500000, max: 1000000, color: '#7DD3FC', label: '500K-1M' },
-  { min: 1000000, max: 3000000, color: '#38BDF8', label: '1M-3M' },
-  { min: 3000000, max: 5000000, color: '#0EA5E9', label: '3M-5M' },
-  { min: 5000000, max: 10000000, color: '#0284C7', label: '5M-10M' },
-  { min: 10000000, max: Infinity, color: '#0369A1', label: '10M+' },
+  { min: 0, max: 200000, color: '#FFF5F5', label: '0-200K' }, // Çok açık pembe/krem
+  { min: 200000, max: 500000, color: '#FFE5E5', label: '200K-500K' }, // Açık pembe
+  { min: 500000, max: 1000000, color: '#FFCCCC', label: '500K-1M' }, // Açık kırmızımsı
+  { min: 1000000, max: 3000000, color: '#FF9999', label: '1M-3M' }, // Orta açık kırmızı
+  { min: 3000000, max: 5000000, color: '#FF6666', label: '3M-5M' }, // Orta kırmızı
+  { min: 5000000, max: 10000000, color: '#FF3333', label: '5M-10M' }, // Koyu kırmızı
+  { min: 10000000, max: Infinity, color: '#E62727', label: '10M+' }, // Çok koyu kırmızı
 ];
 
 export function getColorByPopulation(population: number): string {

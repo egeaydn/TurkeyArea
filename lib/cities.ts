@@ -108,3 +108,54 @@ export function getCityApiName(displayName: string): string {
   const city = TURKISH_CITIES.find(c => c.display === displayName);
   return city?.api || displayName;
 }
+
+// TürkiyeAPI için şehir ismini formatla
+// API muhtemelen orijinal Türkçe karakterli isimleri bekliyor
+export function getTurkiyeApiCityName(cityName: string): string {
+  // Önce TURKISH_CITIES listesinde ara (case-insensitive)
+  const city = TURKISH_CITIES.find(
+    c => c.display === cityName || 
+         c.display.toLowerCase() === cityName.toLowerCase() ||
+         normalizeTurkishChars(c.display) === normalizeTurkishChars(cityName) ||
+         c.api.toLowerCase() === cityName.toLowerCase()
+  );
+  
+  if (city) {
+    // API'den gelen orijinal ismi kullan (display ismi - Türkçe karakterli)
+    // Örnek: "Tekirdağ" -> "Tekirdağ"
+    return city.display;
+  }
+  
+  // Bulunamazsa, orijinal ismi döndür (belki API kabul eder)
+  // Eğer hala çalışmazsa, normalize edilmiş versiyonu dene
+  return cityName;
+}
+
+// Türkçe karakterleri normalize eden fonksiyon (API'ye gönderirken kullanılır)
+// Tüm Türkçe karakterleri İngilizce karşılıklarına çevirir ve küçük harfe çevirir
+// Mapping: ç->c, Ç->C, ğ->g, Ğ->G, ı->i, İ->I, ö->o, Ö->O, ş->s, Ş->S, ü->u, Ü->U
+export function normalizeTurkishChars(text: string): string {
+  return text
+    // Önce büyük harfli Türkçe karakterleri normalize et (büyük harf -> büyük harf)
+    .replace(/Ç/g, 'C')
+    .replace(/Ğ/g, 'G')
+    .replace(/İ/g, 'I')
+    .replace(/Ö/g, 'O')
+    .replace(/Ş/g, 'S')
+    .replace(/Ü/g, 'U')
+    .replace(/Â/g, 'A')
+    .replace(/Î/g, 'I')
+    .replace(/Û/g, 'U')
+    // Sonra küçük harfli Türkçe karakterleri normalize et (küçük harf -> küçük harf)
+    .replace(/ç/g, 'c')
+    .replace(/ğ/g, 'g')
+    .replace(/ı/g, 'i')
+    .replace(/ö/g, 'o')
+    .replace(/ş/g, 's')
+    .replace(/ü/g, 'u')
+    .replace(/â/g, 'a')  // Şapkalı a -> a (Hakkâri -> hakkari)
+    .replace(/î/g, 'i')   // Şapkalı i -> i
+    .replace(/û/g, 'u')  // Şapkalı u -> u
+    // Son olarak tümünü küçük harfe çevir (API'ler genelde küçük harf bekler)
+    .toLowerCase();
+}

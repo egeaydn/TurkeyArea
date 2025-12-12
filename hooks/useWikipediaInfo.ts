@@ -1,5 +1,6 @@
 // Wikipedia API hook for additional city information
 import useSWR from 'swr';
+import { normalizeTurkishChars } from '@/lib/cities';
 
 interface WikipediaSummary {
   title: string;
@@ -19,8 +20,11 @@ const fetcher = async (url: string): Promise<WikipediaSummary> => {
 };
 
 export function useWikipediaInfo(cityName?: string) {
-  const url = cityName
-    ? `https://tr.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(cityName)}`
+  // Şehir ismini normalize et ve küçük harfe çevir
+  const normalizedCityName = cityName ? normalizeTurkishChars(cityName) : undefined;
+  
+  const url = normalizedCityName
+    ? `https://tr.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(normalizedCityName)}`
     : null;
 
   const { data, error, isLoading } = useSWR<WikipediaSummary>(
