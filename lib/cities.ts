@@ -105,7 +105,18 @@ export function normalizeCityName(cityName: string): string {
 
 // Display adından API adına çevirme
 export function getCityApiName(displayName: string): string {
-  const city = TURKISH_CITIES.find(c => c.display === displayName);
+  // Önce tam eşleşme dene
+  let city = TURKISH_CITIES.find(c => c.display === displayName);
+  
+  // Tam eşleşme yoksa, normalize edilmiş karşılaştırma yap
+  if (!city) {
+    const normalizedInput = normalizeTurkishChars(displayName);
+    city = TURKISH_CITIES.find(c => 
+      normalizeTurkishChars(c.display) === normalizedInput ||
+      normalizeTurkishChars(c.api) === normalizedInput
+    );
+  }
+  
   return city?.api || displayName;
 }
 
