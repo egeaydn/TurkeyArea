@@ -270,7 +270,8 @@ Sorularınız için issue açabilir veya pull request gönderebilirsiniz.
 
 <div align="center">
 
-**⭐ Projeyi beğendiyseniz yıldız vermeyi unutmayın!**
+Made with ❤️ by Ege
+
 
 Made with ❤️ and ☕ in Turkey
 
